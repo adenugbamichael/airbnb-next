@@ -10,6 +10,7 @@ const Avatar = () => {
       alt='Avatar'
       src='/images/placeholder.jpg'
       className='rounded-full'
+      priority
     />
   )
 }
