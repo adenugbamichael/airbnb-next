@@ -16,6 +16,7 @@ import Input from "../inputs/Input"
 import Heading from "../Heading"
 import Button from "../Button"
 import Modal from "./Modal"
+import { signIn } from "next-auth/react"
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
@@ -95,13 +96,13 @@ const RegisterModal = () => {
         outline
         label='Continue with Google'
         icon={FcGoogle}
-        // onClick={() => signIn('google')}
+        onClick={() => signIn("google")}
       />
       <Button
         outline
         label='Continue with Github'
         icon={AiFillGithub}
-        // onClick={() => signIn('github')}
+        onClick={() => signIn("github")}
       />
       <div className='text-neutral-500 text-center mt-4 font-light'>
         <p>
