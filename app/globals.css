@@ -95,3 +95,10 @@ h6 {
   hyphens: auto;
   line-height: 1.1;
 }
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}
