@@ -4,20 +4,20 @@ import axios from "axios"
 import { toast } from "react-hot-toast"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import dynamic from "next/dynamic"
+import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
 
 import useRentModal from "@/app/hooks/useRentModal"
-// import useListings from '@/app/hooks/useListings';
 
 import Modal from "./Modal"
 import Counter from "../inputs/Counter"
 import CategoryInput from "../inputs/CategoryInput"
 import CountrySelect from "../inputs/CountrySelect"
-
-import ImageUpload from "../inputs/ImageUpload"
-import Input from "../inputs/input"
-import Heading from "../Heading"
 import { categories } from "../navbar/Categories"
+import ImageUpload from "../inputs/ImageUpload"
+
+import Heading from "../Heading"
+import Input from "../inputs/input"
 
 enum STEPS {
   CATEGORY = 0,
@@ -29,8 +29,8 @@ enum STEPS {
 }
 
 const RentModal = () => {
+  const router = useRouter()
   const rentModal = useRentModal()
-  // const { mutate: mutateListings } = useListings();
 
   const [isLoading, setIsLoading] = useState(false)
   const [step, setStep] = useState(STEPS.CATEGORY)
@@ -73,9 +73,9 @@ const RentModal = () => {
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
-      shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
+      shouldValidate: true,
     })
   }
 
@@ -98,13 +98,13 @@ const RentModal = () => {
       .post("/api/listings", data)
       .then(() => {
         toast.success("Listing created!")
-        // mutateListings();
+        router.refresh()
         reset()
         setStep(STEPS.CATEGORY)
         rentModal.onClose()
       })
-      .catch((error) => {
-        toast.error(error?.response?.data?.error)
+      .catch(() => {
+        toast.error("Something went wrong.")
       })
       .finally(() => {
         setIsLoading(false)
