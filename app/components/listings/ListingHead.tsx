@@ -1,20 +1,19 @@
 "use client"
 
 import Image from "next/image"
-import { User } from "@prisma/client"
 
-// import useCountries from "@/app/common/hooks/useCountries"
+import useCountries from "@/app/hooks/useCountries"
+import { SafeUser } from "@/app/types"
 
 import Heading from "../Heading"
 import HeartButton from "../HeartButton"
-import useCountries from "@/app/hooks/useCountries"
 
 interface ListingHeadProps {
   title: string
   locationValue: string
   imageSrc: string
   id: string
-  currentUser?: User
+  currentUser?: SafeUser | null
 }
 
 const ListingHead: React.FC<ListingHeadProps> = ({

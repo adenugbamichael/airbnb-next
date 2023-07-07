@@ -4,8 +4,7 @@ import dynamic from "next/dynamic"
 import { IconType } from "react-icons"
 
 import useCountries from "@/app/hooks/useCountries"
-
-import { User } from "@prisma/client"
+import { SafeUser } from "@/app/types"
 
 import Avatar from "../Avatar"
 import ListingCategory from "./ListingCategory"
@@ -15,7 +14,7 @@ const Map = dynamic(() => import("../Map"), {
 })
 
 interface ListingInfoProps {
-  user: User
+  user: SafeUser
   description: string
   guestCount: number
   roomCount: number
@@ -83,7 +82,12 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         />
       )}
       <hr />
-      <div className='text-lg font-light text-neutral-500'>{description}</div>
+      <div
+        className='
+      text-lg font-light text-neutral-500'
+      >
+        {description}
+      </div>
       <hr />
       <Map center={coordinates} />
     </div>

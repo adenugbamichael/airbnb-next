@@ -4,21 +4,22 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { format } from "date-fns"
-import { User } from "@prisma/client"
 
 import useCountries from "@/app/hooks/useCountries"
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types"
 
 import HeartButton from "../HeartButton"
 import Button from "../Button"
+import ClientOnly from "../ClientOnly"
 
 interface ListingCardProps {
-  data: Record<string, any>
-  reservation?: Record<string, any>
+  data: SafeListing
+  reservation?: SafeReservation
   onAction?: (id: string) => void
   disabled?: boolean
   actionLabel?: string
   actionId?: string
-  currentUser?: User
+  currentUser?: SafeUser | null
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({

@@ -1,14 +1,15 @@
-import { User } from "@prisma/client"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { toast } from "react-hot-toast"
 
+import { SafeUser } from "@/app/types"
+
 import useLoginModal from "./useLoginModal"
 
 interface IUseFavorite {
   listingId: string
-  currentUser?: User
+  currentUser?: SafeUser | null
 }
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
@@ -43,7 +44,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         router.refresh()
         toast.success("Success")
       } catch (error) {
-        toast.error("Something went wrong")
+        toast.error("Something went wrong.")
       }
     },
     [currentUser, hasFavorited, listingId, loginModal, router]
