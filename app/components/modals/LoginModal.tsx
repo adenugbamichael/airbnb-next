@@ -6,21 +6,19 @@ import { signIn } from "next-auth/react"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { FcGoogle } from "react-icons/fc"
 import { AiFillGithub } from "react-icons/ai"
+import { useRouter } from "next/navigation"
 
 import useRegisterModal from "@/app/hooks/useRegisterModal"
 import useLoginModal from "@/app/hooks/useLoginModal"
-// import useCurrentUser from "@/app/hooks/useCurrentUser";
 
-import Input from "../inputs/input"
 import Modal from "./Modal"
 import Heading from "../Heading"
+// import Input from "../inputs/Input"
 import Button from "../Button"
+import Input from "../inputs/input"
 
 const LoginModal = () => {
-  // const { mutate: mutateCurrentUser } = useCurrentUser();
-
-  const currentUser: any = null
-
+  const router = useRouter()
   const loginModal = useLoginModal()
   const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +45,7 @@ const LoginModal = () => {
 
       if (callback?.ok) {
         toast.success("Logged in")
-        mutateCurrentUser()
+        router.refresh()
         loginModal.onClose()
       }
 
@@ -100,7 +98,10 @@ const LoginModal = () => {
         icon={AiFillGithub}
         onClick={() => signIn("github")}
       />
-      <div className='text-neutral-500 text-center mt-4 font-light'>
+      <div
+        className='
+      text-neutral-500 text-center mt-4 font-light'
+      >
         <p>
           First time using Airbnb?
           <span

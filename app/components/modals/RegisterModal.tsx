@@ -2,7 +2,7 @@
 
 import axios from "axios"
 import { AiFillGithub } from "react-icons/ai"
-// import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react"
 import { FcGoogle } from "react-icons/fc"
 import { useCallback, useState } from "react"
 import { toast } from "react-hot-toast"
@@ -11,12 +11,10 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import useLoginModal from "@/app/hooks/useLoginModal"
 import useRegisterModal from "@/app/hooks/useRegisterModal"
 
-import Input from "../inputs/input"
-
+import Modal from "./Modal"
+import Input from "../inputs/Input"
 import Heading from "../Heading"
 import Button from "../Button"
-import Modal from "./Modal"
-import { signIn } from "next-auth/react"
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
@@ -104,7 +102,14 @@ const RegisterModal = () => {
         icon={AiFillGithub}
         onClick={() => signIn("github")}
       />
-      <div className='text-neutral-500 text-center mt-4 font-light'>
+      <div
+        className='
+          text-neutral-500 
+          text-center 
+          mt-4 
+          font-light
+        '
+      >
         <p>
           Already have an account?
           <span
